@@ -6,7 +6,12 @@
 数据:
 ### 能源端：广东电网平均碳排放因子
 数据来源：生态环境部、国家统计局
-网址：(关于发布2023年电力二氧化碳排放因子的公告)[https://www.mee.gov.cn/xxgk2018/xxgk/xxgk01/202512/t20251231_1139517.html]
+网址：
+[关于发布2023年电力二氧化碳排放因子的公告](https://www.mee.gov.cn/xxgk2018/xxgk/xxgk01/202512/t20251231_1139517.html)
+[中国气候变化信息网](https://www.ccchina.org.cn/archiver/ccchinacn/UpFile/Files/Default/20131011145155611667.pdf)
+[2005—2021年区域和省级电网碳排放因子研究](https://www.climatechange.cn/article/2024/1673-1719/1673-1719-20-3-337.shtml)
+(已处理数据)[2019-2023年官方二氧化碳排放因子](https://www.cnblogs.com/fancyu/p/18302723)
+(未验证)[中国碳核算数据库](https://www.ceads.net.cn/data/province/)
 ### 产业端：迁出地原有产能、用电量
 
 ### 环境端：火电铝的行业平均碳足迹
