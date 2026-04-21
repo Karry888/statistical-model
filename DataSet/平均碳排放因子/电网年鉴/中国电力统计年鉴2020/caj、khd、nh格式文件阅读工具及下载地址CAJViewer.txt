@@ -1,0 +1,5 @@
+caj、khd、nh格式文件阅读工具CAJViewer 云阅读
+下载地址：http://cajviewer.cnki.net/cajcloud/
+
+有些老资料需要用 7.2版
+http://cajviewer.cnki.net/download.html
