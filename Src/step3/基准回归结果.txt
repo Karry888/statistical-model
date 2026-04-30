@@ -1,0 +1,38 @@
+                          PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                 output   R-squared:                        0.6698
+Estimator:                   PanelOLS   R-squared (Between):             -0.1292
+No. Observations:                  54   R-squared (Within):               0.6698
+Date:                Thu, Apr 30 2026   R-squared (Overall):             -0.0427
+Time:                        14:02:16   Log-likelihood                   -309.71
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      12.168
+Entities:                           5   P-value                           0.0000
+Avg Obs:                       10.800   Distribution:                    F(7,42)
+Min Obs:                      10.0000                                           
+Max Obs:                       11.000   F-statistic (robust):         -4.939e+15
+                                        P-value                           1.0000
+Time periods:                      11   Distribution:                    F(7,42)
+Avg Obs:                       4.9091                                           
+Min Obs:                       4.0000                                           
+Max Obs:                       5.0000                                           
+                                                                                
+                                  Parameter Estimates                                   
+========================================================================================
+                      Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+----------------------------------------------------------------------------------------
+Intercept               -288.28     538.94    -0.5349     0.5955     -1375.9      799.34
+export                   1.8226     0.5190     3.5119     0.0011      0.7752      2.8699
+gd_al_product_output     0.0018     0.3892     0.0047     0.9963     -0.7837      0.7873
+policy_shock             148.53     39.364     3.7731     0.0005      69.087      227.97
+elec_price               1309.6     522.56     2.5062     0.0162      255.08      2364.2
+grid_cef                -361.42     297.67    -1.2142     0.2315     -962.15      239.30
+policy_dummy             69.698     41.050     1.6979     0.0969     -13.144      152.54
+al_price                -0.0020     0.0089    -0.2313     0.8182     -0.0199      0.0158
+========================================================================================
+
+F-test for Poolability: 165.12
+P-value: 0.0000
+Distribution: F(4,42)
+
+Included effects: Entity
