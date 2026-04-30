@@ -157,8 +157,11 @@ def clean_and_save_file(file_name):
     
     # 3. 优化数据类型：自动检测数值列并转换
     for col in df.columns:
-        # 尝试转换为数值，错误则强制为NaN（非数值会变成NaN）
-        df[col] = pd.to_numeric(df[col], errors='ignore')
+        # 尝试转换为数值，无法转换的列保留原样
+        try:
+            df[col] = pd.to_numeric(df[col])
+        except (ValueError, TypeError):
+            pass
     
     # 4. 科学预测缺失值
     df_imputed, impute_log = predict_missing_values(df, file_name, sheet_name)
