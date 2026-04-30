@@ -60,7 +60,7 @@
 ### 2.3 数据文件说明
 | 文件 | 路径 | 内容 |
 |------|------|------|
-| Y_Capacity_and_Output.xlsx | Data/ | 各省电解铝产能与产量面板数据 |
+| Y_Output.xlsx | Data/ | 各省电解铝产能与产量面板数据 |
 | X_Guangdong_Demand_and_Policy.xlsx | Data/ | 广东需求侧变量（export, gd_al_product_output, policy_shock） |
 | C_Control_Variable.xlsx | Data/ | 各省控制变量（elec_price, grid_cef, policy_dummy, al_price, al_price_global） |
 
@@ -68,25 +68,27 @@
 
 ## 三、仓库目录结构
 ```
-├── README.md                       # 项目总览文档（本文档）
-├── Data/                           # 核心面板数据（Excel 格式）
-│   ├── Y_Capacity_and_Output.xlsx   # 被解释变量
-│   ├── X_Guangdong_Demand_and_Policy.xlsx  # 核心解释变量
-│   ├── C_Control_Variable.xlsx      # 控制变量
-│   └──   RawData/                        # 原始数据与参考资料（按类别归档）
-│       ├── 平均碳排放因子/              # 电网碳排放因子原始文件（2015-2024）
-│       ├── 投入产出表/                  # MRIO 表（2018、2020）
-│       ├── 政策文件/                    # 电力体制改革、政府文件
-│       ├── 电网工业用电价格/            # 各省电价文件
-│       └── 电解铝产量/                  # 各省产量数据
-├── Docs/                            # 论文写作材料
-    └── papers/                         # 参考文献 PDF
-├── Src/                            # 可复现代码（待建立）
-│   ├── Data_Cleaning/               # 数据清洗与缺失值处理
-│   ├── Model/                       # 基准回归、DID、GAM 模型
-│   └── Visualization/               # 图表可视化
-├── Output/                          # 模型输出与图表
-└── Appendix/                        # 竞赛附录材料
+├── README.md                            # 项目总览文档（本文档）
+├── Data/                                # 核心面板数据（Excel 格式）
+│   ├── Y_Output.xlsx                    # 被解释变量：产能与产量
+│   ├── X_Guangdong_Demand_and_Policy.xlsx  # 核心解释变量：广东需求与政策
+│   ├── C_Control_Variable.xlsx          # 控制变量
+│   └── Raw/                             # 原始数据与参考资料（按类别归档）
+│       ├── DataSource.md                # 数据溯源文档
+│       ├── 平均碳排放因子/               # 电网碳排放因子原始文件（2015-2024）
+│       ├── 投入产出表/                   # MRIO 表（2018、2020）
+│       ├── 政策文件/                     # 电力体制改革、政府文件
+│       ├── 电网工业用电价格/             # 各省电价文件
+│       ├── 电解铝产量/                   # 各省产量数据
+│       └── 铝价/                        # 全球铝价、沪铝价格序列
+├── Docs/                                # 论文写作材料
+│   └── papers/                          # 参考文献 PDF
+├── Src/                                 # 可复现代码
+│   ├── Data_Cleaning/                   # 数据清洗与缺失值处理
+│   ├── Models/                          # 基准回归、DID、GAM 模型
+│   └── Visualization/                   # 图表可视化
+├── Outputs/                             # 模型输出与图表
+└── Appendix/                            # 竞赛附录材料
 ```
 
 ---
@@ -179,7 +181,7 @@ $$Output_{it} = \beta_0 + f(Export_{t}) + \beta_2 GdAlOutput_{t} + \beta_3 Polic
 
 | 优先级 | 任务 | 说明 |
 |--------|------|------|
-| **P0** | 补齐 grid_cef、policy_dummy、al_price | 数据齐全才能跑模型 |
+| **P0** | 补齐 grid_cef、policy_dummy | 数据齐全才能跑模型 |
 | **P0** | 收集对照组（新疆、山东）全部变量 | DID必需 |
 | **P0** | 估算缺失数据并统一省份代码 | 缺失数据处理 + 标准化 |
 | **P1** | 构建完整面板数据集 | 合并处理组+对照组，省份-年份格式 |
@@ -189,7 +191,7 @@ $$Output_{it} = \beta_0 + f(Export_{t}) + \beta_2 GdAlOutput_{t} + \beta_3 Polic
 ### 6.2 代码实现提示（无真实代码）
 
 #### 数据准备阶段
-1. **统一省份代码**：所有Excel文件使用一致的省份编码（建议 ISO 3166-2 或自定义编码如 YN/GX/NMG/XJ/SD/NX），确保跨表合并时不出现匹配失败。
+1. **统一省份代码**：所有Excel文件使用一致的省份编码（建议 ISO 3166-2 或自定义编码如 YN/GX/NMG/XJ/SD），确保跨表合并时不出现匹配失败。
 2. **合并为单一长面板**：将 Y、X、C 三张表按 `province + year` 键合并为一张完整的面板数据表，处理组和对照组使用相同结构。
 3. **缺失值处理链**：建立缺失值处理日志，记录每个缺失值的填补方法（插值 / 趋势外推 / 行业均值），保留原始值与填补值的对照，供论文数据说明使用。
 4. **变量标准化**：连续变量建议做标准化处理（z-score），使得回归系数在量纲上可比。虚拟变量不做标准化。
